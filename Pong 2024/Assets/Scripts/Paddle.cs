@@ -20,11 +20,11 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(upKey) && transform.position.y < maxYPosition)
+        if (Input.GetKey(upKey))
         { 
             MoveUp();
         }
-        else if (Input.GetKey(downKey) && transform.position.y > -maxYPosition)
+        else if (Input.GetKey(downKey))
         {
             MoveDown();
         }
@@ -40,14 +40,20 @@ public class Paddle : MonoBehaviour
         }
     }
 
-    void MoveUp()
+    public void MoveUp()
     {
-        transform.position += Vector3.up * verticalMovementSpeed;
+        if (transform.position.y < maxYPosition)
+        { 
+            transform.position += Vector3.up * verticalMovementSpeed;
+        }
     }
 
-    void MoveDown()
+    public void MoveDown()
     {
-        transform.position += Vector3.down * verticalMovementSpeed;
+        if (transform.position.y > -maxYPosition)
+        { 
+            transform.position += Vector3.down * verticalMovementSpeed;
+        }
     }
 
     void HitBall()

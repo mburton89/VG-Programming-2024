@@ -6,6 +6,8 @@ public class Goal : MonoBehaviour
 {
     public bool isLeftPlayer;
 
+    public GameObject splodePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class Goal : MonoBehaviour
         if (collision.gameObject.GetComponent<Ball>())
         {
             HandleBallCollision();
+            Instantiate(splodePrefab, collision.gameObject.transform.position, transform.rotation);
             Destroy(collision.gameObject);
         }
     }
