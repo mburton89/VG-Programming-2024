@@ -6,7 +6,7 @@ public abstract class Powerup : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SoundManager.instance.PlayBlipSound();
+        SoundManager.instance.PlayPowerSound();
         GetCollected();
         Destroy(gameObject);
     }
