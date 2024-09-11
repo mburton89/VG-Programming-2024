@@ -2797,7 +2797,7 @@ GameObject:
   - component: {fileID: 7152922762291818410}
   - component: {fileID: 7544399716544124581}
   m_Layer: 0
-  m_Name: Power Up - YOUR POWERUP
+  m_Name: Power Up - SpeedBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
