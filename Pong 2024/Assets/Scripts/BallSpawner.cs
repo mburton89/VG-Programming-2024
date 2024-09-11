@@ -56,4 +56,20 @@ public class BallSpawner : MonoBehaviour
 
         newBall.GetComponent<Ball>().direction = spawnDirection;
     }
+
+    public void SpawnMultiBall()
+    {
+        GameObject newBall = Instantiate(ballPrefab);
+
+        float randY = 0;
+
+        while (randY < 0.2f && randY > -0.2f)
+        {
+            randY = Random.Range(-0.5f, 0.5f);
+        }
+
+        spawnDirection = new Vector3(spawnDirection.x, spawnDirection.y + randY);
+
+        newBall.GetComponent<Ball>().direction = spawnDirection;
+    }
 }

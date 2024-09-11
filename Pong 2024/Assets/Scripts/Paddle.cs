@@ -44,7 +44,7 @@ public class Paddle : MonoBehaviour
     {
         if (transform.position.y < maxYPosition)
         { 
-            transform.position += Vector3.up * verticalMovementSpeed;
+            transform.position += Vector3.up * verticalMovementSpeed * Time.deltaTime;
         }
     }
 
@@ -52,7 +52,7 @@ public class Paddle : MonoBehaviour
     {
         if (transform.position.y > -maxYPosition)
         { 
-            transform.position += Vector3.down * verticalMovementSpeed;
+            transform.position += Vector3.down * verticalMovementSpeed * Time.deltaTime;
         }
     }
 

@@ -45,7 +45,11 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            BallSpawner.Instance.SpawnBall();
+            Ball[] balls = FindObjectsByType<Ball>(FindObjectsSortMode.None);
+            if (balls.Length < 2)
+            { 
+                BallSpawner.Instance.SpawnBall();
+            }
         }
 
         UpdateScoreboard();

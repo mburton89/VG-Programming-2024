@@ -25,11 +25,12 @@ public class Ball : MonoBehaviour
     public void GetHit(Vector3 hitDirection)
     {
         direction = hitDirection;
+        SoundManager.instance.PlayBlipSound();
     }
 
     void Move()
     {
-        transform.position += direction * movementSpeed;
+        transform.position += direction * movementSpeed * Time.deltaTime;
     }
 
     void CheckBoundaries()
