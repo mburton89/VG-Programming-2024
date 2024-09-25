@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac6b81ffec93ca4abae2f84e9853b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectible: {fileID: 902515715721647982, guid: a19f8eae7e147cf42938c3e0dba17caa, type: 3}
+  collectible: {fileID: 750150049806694389, guid: c5ee07b75d023444d8cea93f3fcfffe7, type: 3}
   cubeCount: 0
   spawnRange: 90
 --- !u!1660057539 &9223372036854775807
