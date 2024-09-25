@@ -149,3 +149,6 @@ MonoBehaviour:
   collectibleWeight: 0
   minCollectibleSize: 0.5
   maxCollectibleSize: 2
+  heavyMaterial: {fileID: 2100000, guid: 7f3eb07a0b8536746ace2a88443be890, type: 2}
+  midMaterial: {fileID: 2100000, guid: 6456cdf28784e5c4cbd7d0ee2fa6da85, type: 2}
+  lightMaterial: {fileID: 2100000, guid: 7f0c3fb5c8193ca43aff1b0195eff46c, type: 2}

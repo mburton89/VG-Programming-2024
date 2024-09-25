@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Collectible : MonoBehaviour
@@ -8,6 +9,9 @@ public class Collectible : MonoBehaviour
     public float minCollectibleSize;
     public float maxCollectibleSize;
 
+    public Material heavyMaterial;
+    public Material midMaterial;
+    public Material lightMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +20,7 @@ public class Collectible : MonoBehaviour
         Vector3 newSize = new Vector3(randSize, randSize, randSize);
         transform.localScale = newSize;
         collectibleWeight = randSize * randSize;
+        AssignMaterial();
     }
 
     // Update is called once per frame
@@ -38,6 +43,21 @@ public class Collectible : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void AssignMaterial()
+    {
+        if (collectibleWeight <= 0.33f * maxCollectibleSize)
+        {
+           GetComponent<Renderer>().material = lightMaterial;
+        }
+        else if (collectibleWeight <= 0.66f * maxCollectibleSize)
+        {
+            GetComponent<Renderer>().material = midMaterial;
+        }
+        else
+        {
+            GetComponent<Renderer>().material = heavyMaterial;
+        }
+    }
     public void SlowDownPlayer()
     {
 
