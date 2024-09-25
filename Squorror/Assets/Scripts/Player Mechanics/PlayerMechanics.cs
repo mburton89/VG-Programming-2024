@@ -21,7 +21,7 @@ public class PlayerMechanics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HandleMovementInput();
     }
 
     void HandleMovementInput()
