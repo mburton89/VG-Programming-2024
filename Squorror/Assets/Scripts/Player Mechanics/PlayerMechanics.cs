@@ -4,36 +4,55 @@ using UnityEngine;
 
 public class PlayerMechanics : MonoBehaviour
 {
-    public CharacterController characterController;
+   
     public float speed;
-    public int itemsCollected;
-    bool isDead;
-    public float maxHealth;
-    public float currentHealth;
     public float jumpHeight;
+    public float gravity = -9.81f;
 
-    // Start is called before the first frame update
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+
+    private float xRotation = 0f;
+
     void Start()
     {
-        currentHealth = maxHealth;
+        controller = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor in the center of the screen
     }
 
-    // Update is called once per frame
     void Update()
     {
-        HandleMovementInput();
+        Movement();
     }
 
-    void HandleMovementInput()
+    public void Movement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        // Check if the player is grounded
+        isGrounded = controller.isGrounded;
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f; // Make sure the player sticks to the ground
+        }
 
-        Vector3 movement = new Vector3(horizontal, 0f, vertical).normalized;
-        Vector3 moveDirection = Camera.main.transform.TransformDirection(movement);
-        moveDirection.y = 0f;
+        // Get player input for movement
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
 
-        characterController.Move(moveDirection * speed * Time.deltaTime);
+        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        controller.Move(move * speed * Time.deltaTime);
+
+        // Jumping
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        // Apply gravity
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
+        
     }
 
 }
