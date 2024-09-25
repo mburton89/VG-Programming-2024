@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KalebTempScript : MonoBehaviour
+public class CollectiblePickUp : MonoBehaviour
 {
     public float pickUpRange = 2.0f; // Distance within which the player can pick up the object
     public float dropOffRange = 2.0f; // Distance within which the player can drop off items
