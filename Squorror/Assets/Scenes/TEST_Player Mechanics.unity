@@ -684,12 +684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8307a0c1789b48d4fa23976814feaa5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 845333399}
   speed: 10
-  itemsCollected: 0
-  maxHealth: 5
-  currentHealth: 0
-  jumpHeight: 0
+  jumpHeight: 2
+  gravity: -9.81
+  mouseSensitivity: 100
 --- !u!114 &845333401
 MonoBehaviour:
   m_ObjectHideFlags: 0
