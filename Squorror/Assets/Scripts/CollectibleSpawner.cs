@@ -24,10 +24,10 @@ public class CollectibleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnOneCollectible();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    SpawnOneCollectible();
+        //}
     }
 
    public void SpawnOneCollectible()

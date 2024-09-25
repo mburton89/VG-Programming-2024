@@ -21,10 +21,10 @@ public class Collectible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) 
-        {
-            GetCollected();
-        }
+        //if (Input.GetKeyDown(KeyCode.E)) 
+        //{
+        //    GetCollected();
+        //}
     }
 
    // private void OnCollisionEnter(Collision collision)

@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            AddWeightToBase();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    AddWeightToBase();
+        //}
     }
 
     public void AddWeightToPlayer(float weightToAdd)
