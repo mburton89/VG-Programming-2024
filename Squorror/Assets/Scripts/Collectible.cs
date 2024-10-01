@@ -16,6 +16,7 @@ public class Collectible : MonoBehaviour
         Vector3 newSize = new Vector3(randSize, randSize, randSize);
         transform.localScale = newSize;
         collectibleWeight = randSize * randSize;
+        AssignMaterial();
     }
 
     // Update is called once per frame
@@ -36,6 +37,22 @@ public class Collectible : MonoBehaviour
     {
         GameManager.Instance.AddWeightToPlayer(collectibleWeight);
         Destroy(gameObject);
+    }
+
+    public void AssignMaterial()
+    {
+        if (collectibleWeight <= 0.33f * maxCollectibleSize)
+        {
+            GetComponent<Renderer>().material = lightMaterial;
+        }
+        else if (collectibleWeight <= 0.66f * maxCollectibleSize)
+        {
+            GetComponent<Renderer>().material = midMaterial;
+        }
+        else
+        {
+            GetComponent<Renderer>().material = heavyMaterial;
+        }
     }
 
     public void SlowDownPlayer()
