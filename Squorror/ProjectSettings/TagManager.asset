@@ -4,15 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Floor
+  - DropOff
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - pickable
   - Water
   - UI
-  - 
+  - DropOff
   - 
   - 
   - 
