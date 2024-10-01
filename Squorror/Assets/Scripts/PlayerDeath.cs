@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerDeath : PlayerMechanics
 {
     bool isDead = false;
+    float currentHealth;
 
     void Update()
     {
