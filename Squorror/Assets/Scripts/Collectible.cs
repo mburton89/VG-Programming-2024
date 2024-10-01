@@ -8,6 +8,9 @@ public class Collectible : MonoBehaviour
     public float minCollectibleSize;
     public float maxCollectibleSize;
 
+    public Material lightMaterial;
+    public Material midMaterial;
+    public Material heavyMaterial;
 
     // Start is called before the first frame update
     void Start()
