@@ -21,6 +21,11 @@ public class HUD : MonoBehaviour
     public void UpdateWeightBarUI(float currentWeight, float maxWeight)
     {
         weightBar.fillAmount = currentWeight / maxWeight;
+
+        if (currentWeight / maxWeight > 0.8f)
+        {
+            weightBar.color = Color.red;
+        }
     }
 
     public void UpdateBaseWeightNumber(int baseWeight)
