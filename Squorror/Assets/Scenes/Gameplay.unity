@@ -3512,6 +3512,7 @@ GameObject:
   - component: {fileID: 929003122}
   - component: {fileID: 929003121}
   - component: {fileID: 929003120}
+  - component: {fileID: 929003127}
   m_Layer: 0
   m_Name: Player
   m_TagString: Agent
@@ -3663,6 +3664,28 @@ Transform:
   - {fileID: 43213412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929003127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929003119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8a4c30662e26c49b21ee381f103818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpRange: 2
+  dropOffRange: 2
+  playerCamera: {fileID: 43213412}
+  pickUpLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  dropOffLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  maxItems: 5
 --- !u!1 &943372045
 GameObject:
   m_ObjectHideFlags: 0
