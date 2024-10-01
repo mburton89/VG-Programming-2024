@@ -9,24 +9,21 @@ public class CollectiblePickUp : MonoBehaviour
     public Transform playerCamera; // Reference to the player's camera
     public LayerMask pickUpLayer; // Layer mask to detect pickable objects
     public LayerMask dropOffLayer; // Layer mask for drop-off points
-    private int currentItemCount = 0; // Current number of collected items
-    public int CurrentItemCount => currentItemCount;
 
+    public GameObject collectiblePrefab; // Prefab of the collectible to instantiate
+    public Transform dropOffCube; // Reference to the drop-off point in the scene
+    public float spawnOffset = 1.0f; // Offset to avoid overlap when instantiating collectibles
+
+    private int currentItems = 0; // Current number of collected items
+    private GameObject objectInRange; // Object currently in pick-up range
+    private GameObject dropOffPoint; // The drop-off object within range
     private List<GameObject> collectedItems = new List<GameObject>(); // List to hold collected items
-    private GameObject dropOffPoint;
-    private GameObject objectInRange;
-    private GameObject collectible;
 
-    // Maximum number of items the player can hold
-    public int maxItems = 5;
-
-    // Current number of items the player is holding
-    private int currentItems = 0;
+    public int maxItems = 5; // Maximum number of items the player can hold
 
     void Start()
     {
-        // Initialize the inventory
-        UpdateInventoryUI();
+        UpdateInventoryUI(); // Initialize the inventory UI
     }
 
     void Update()
@@ -42,67 +39,12 @@ public class CollectiblePickUp : MonoBehaviour
         CheckForDropOffPoint();
     }
 
-    // Method to add an item
-    public bool AddItem()
-    {
-        if (currentItems < maxItems)
-        {
-            currentItems++;
-            UpdateInventoryUI();
-            return true; // Successfully added item
-        }
-        else
-        {
-            Debug.Log("Inventory is full!");
-            return false; // Inventory full
-        }
-    }
-
-    // Method to remove an item
-    public bool RemoveItem()
-    {
-        if (currentItems > 0)
-        {
-            Debug.Log("Item removed");
-            currentItems--;
-            UpdateInventoryUI();
-            return true; // Successfully removed item
-        }
-        else
-        {
-            Debug.Log("No items to remove!");
-            return false; // No items to remove
-        }
-    }
-
-    // Method to check the current number of items
-    public int GetCurrentItemCount()
-    {
-        return currentItems;
-    }
-
-    // Method to get the maximum number of items
-    public int GetMaxItemCount()
-    {
-        return maxItems;
-    }
-
-    // Display or update the inventory UI
-    private void UpdateInventoryUI()
-    {
-        // Placeholder for updating any UI elements displaying inventory counts
-        Debug.Log($"Inventory: {currentItems}/{maxItems} items");
-    }
-
     // Method to check if there is an object within range
     void CheckForObjectInRange()
     {
         RaycastHit hit;
-
-        // Cast a ray from the camera's position in the direction the camera is facing
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, pickUpRange, pickUpLayer))
         {
-            // If the ray hits an object within the pick-up layer, set it as the object in range
             objectInRange = hit.collider.gameObject;
             Debug.Log($"Object in range: {objectInRange.name}");
         }
@@ -115,27 +57,32 @@ public class CollectiblePickUp : MonoBehaviour
     // Method to pick up the item
     void PickUpItem()
     {
-        if (AddItem())
+        if (currentItems < maxItems)
         {
+            collectedItems.Add(objectInRange); // Add the item to the list
+            Destroy(objectInRange); // Destroy the item in the scene
+            currentItems++;
+            UpdateInventoryUI();
             Debug.Log($"Picked up: {objectInRange.name}");
-            Destroy(objectInRange);
-            objectInRange = null;
         }
         else
         {
-            Debug.Log("Unable to pick up item: Inventory full");
+            Debug.Log("Inventory is full!");
         }
+    }
+
+    // Display or update the inventory UI
+    private void UpdateInventoryUI()
+    {
+        Debug.Log($"Inventory: {currentItems}/{maxItems} items");
     }
 
     // Check for a drop-off point within range
     void CheckForDropOffPoint()
     {
         RaycastHit hit;
-
-        // Cast a ray from the camera's position in the direction the camera is facing
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, dropOffRange, dropOffLayer))
         {
-            // If the ray hits an object within the drop-off layer, set it as the drop-off point
             dropOffPoint = hit.collider.gameObject;
         }
         else
@@ -144,14 +91,29 @@ public class CollectiblePickUp : MonoBehaviour
         }
     }
 
-    // Method to drop off all collected items
-    public void DropAllItems()
+    // Collision detection to drop off items
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("DropOff"))
+        {
+            Debug.Log($"Collided with drop-off object: {collision.gameObject.name}");
+            DropAndInstantiateItems();
+        }
+    }
+
+    // Method to drop off and instantiate all collected items
+    public void DropAndInstantiateItems()
     {
         if (currentItems > 0)
         {
-            Debug.Log($"Dropped off all items: {currentItems}");
-            currentItems = 0;
+            for (int i = 0; i < currentItems; i++)
+            {
+                InstantiateCollectible(i);
+            }
+            collectedItems.Clear(); // Clear the list of collected items
+            currentItems = 0; // Reset item count
             UpdateInventoryUI();
+            Debug.Log("All items dropped off and instantiated.");
         }
         else
         {
@@ -159,14 +121,22 @@ public class CollectiblePickUp : MonoBehaviour
         }
     }
 
-    // Collision detection to drop off items
-    private void OnCollisionEnter(Collision collision)
+    // Method to instantiate a single collectible at the drop-off point
+    private void InstantiateCollectible(int index)
     {
-        // Check if the collided object has the "DropOff" tag
-        if (collision.gameObject.CompareTag("DropOff"))
+        if (collectiblePrefab != null)
         {
-            Debug.Log($"Collided with drop-off object: {collision.gameObject.name}");
-            DropAllItems();
+            // Calculate the spawn position with a slight offset to prevent overlap
+            Vector3 spawnPosition = dropOffCube.position + new Vector3(index * spawnOffset, 1.524f, 0);
+            GameObject collectible = Instantiate(collectiblePrefab, spawnPosition, Quaternion.identity);
+            collectible.name = $"Collectible_{index + 1}";
+            Rigidbody rb = collectible.AddComponent<Rigidbody>();
+            rb.mass = 1f;
+            Debug.Log($"Instantiated {collectible.name} at position {spawnPosition}");
+        }
+        else
+        {
+            Debug.LogError("Collectible prefab is not assigned!");
         }
     }
 }
