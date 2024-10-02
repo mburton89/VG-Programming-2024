@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerDeath : PlayerMechanics
+public class PlayerDeath : MonoBehaviour
 {
+    public PlayerMechanics playerMechanics;
+    public GameObject RetryButton;
     bool isDead = false;
-    float currentHealth;
 
     void Update()
     {
@@ -16,21 +17,24 @@ public class PlayerDeath : PlayerMechanics
 
     public void HandleDeath()
     {
-        if (currentHealth  <= 0)
+        if (playerMechanics.currentHealth  <= 0)
         {
             isDead = true;
+            playerMechanics.enabled = false;
+            GetComponent<FirstPersonCamera>().enabled = false;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     public void HandleUI()
     {
         if (isDead == false)
         {
-            GameObject.Find("UI").SetActive(false);
+            RetryButton.SetActive(false);
         }
 
         else
         {
-            GameObject.Find("UI").SetActive(true);
+            RetryButton.SetActive(true);
         }
     }
 }
