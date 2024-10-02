@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6478445283297088507}
   - component: {fileID: 4729569748197705923}
   - component: {fileID: 3805206977405413244}
-  - component: {fileID: 2204062524099256369}
+  - component: {fileID: 6758356340399083363}
   m_Layer: 0
   m_Name: Enemy - Angel
   m_TagString: Untagged
@@ -215,7 +215,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2204062524099256369
+--- !u!114 &6758356340399083363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,14 +224,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7773798606940735328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4431609e99530428fc00269e8be989, type: 3}
+  m_Script: {fileID: 11500000, guid: 006690cf347550a46a0c99f7bb8674a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpscareTime: 1
+  moveSpeed: 12
+  jumpscareTime: 0
   ai: {fileID: 3805206977405413244}
   player: {fileID: 0}
-  viewAngleThreshold: 80
+  viewAngleThreshold: 65
   playerCam: {fileID: 0}
   jumpscareCam: {fileID: 8228712177282730151}
-  catchDistance: 1
+  catchDistance: 3
