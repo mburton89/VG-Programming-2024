@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class Monster : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class Monster : MonoBehaviour
     Vector3 dest;
     public Camera playerCam, jumpscareCam;
     public float catchDistance;
-    
+    public AudioClip jumpscareSound;
+
     private void Start()
     {
         player = GameObject.Find("Player").transform;
@@ -78,11 +80,11 @@ public class Monster : MonoBehaviour
         ai.destination = dest; //The AI's destination will equal to dest
 
         //If the distance between the player and the AI is less than or equal to the catchDistance,
-        if (distance <= catchDistance)
+        if (distance <= catchDistance && (player.gameObject.activeSelf == true))
         {
             player.gameObject.SetActive(false); //The player object will be set false
             jumpscareCam.gameObject.SetActive(true); //The jumpscare camera will be set true
-          
+            SoundManager.Instance.Play(jumpscareSound, transform.position, .5f);
         }
     }
 }
