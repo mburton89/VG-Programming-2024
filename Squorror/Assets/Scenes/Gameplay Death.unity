@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 181038904}
   - component: {fileID: 181038907}
   m_Layer: 5
-  m_Name: Button - Retry
+  m_Name: RetryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1145,6 +1145,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6758356340399083363, guid: c83fa16e35f562e489711b3511cbfd04, type: 3}
+      propertyPath: playerMechanics
+      value: 
+      objectReference: {fileID: 929003121}
     - target: {fileID: 7773798606940735328, guid: c83fa16e35f562e489711b3511cbfd04, type: 3}
       propertyPath: m_Name
       value: Enemy - Angel
@@ -3788,7 +3792,6 @@ GameObject:
   - component: {fileID: 929003120}
   - component: {fileID: 929003127}
   - component: {fileID: 929003128}
-  - component: {fileID: 929003129}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3976,21 +3979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMechanics: {fileID: 929003121}
---- !u!114 &929003129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929003119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1eccb33be9a913468d330f90f9ff77f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMechanics: {fileID: 929003121}
-  colliderTag1: Player
-  colliderTag2: Enemy
+  RetryButton: {fileID: 181038902}
 --- !u!1 &943372045
 GameObject:
   m_ObjectHideFlags: 0
