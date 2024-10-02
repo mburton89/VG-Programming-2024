@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerDeath : MonoBehaviour
 {
     public PlayerMechanics playerMechanics;
-
+    public GameObject RetryButton;
     bool isDead = false;
 
     void Update()
@@ -29,12 +29,12 @@ public class PlayerDeath : MonoBehaviour
     {
         if (isDead == false)
         {
-            GameObject.Find("Canvas").SetActive(false);
+            RetryButton.SetActive(false);
         }
 
         else
         {
-            GameObject.Find("Canvas").SetActive(true);
+            RetryButton.SetActive(true);
         }
     }
 }

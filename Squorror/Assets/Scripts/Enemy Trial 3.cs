@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
-   
+
+    public PlayerMechanics playerMechanics;
     public float moveSpeed = 10f; // Speed of movement
     private bool isMoving = true; // Whether the object should be moving
     public float jumpscareTime;
@@ -80,8 +81,9 @@ public class Monster : MonoBehaviour
         //If the distance between the player and the AI is less than or equal to the catchDistance,
         if (distance <= catchDistance)
         {
-            player.gameObject.SetActive(false); //The player object will be set false
+            //player.gameObject.SetActive(false); //The player object will be set false
             jumpscareCam.gameObject.SetActive(true); //The jumpscare camera will be set true
+            playerMechanics.currentHealth = 0;
           
         }
     }
