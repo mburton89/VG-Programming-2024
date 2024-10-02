@@ -8,13 +8,14 @@ public class CollectiblePickUp : MonoBehaviour
     public float dropOffRange = 2.0f; // Distance within which the player can drop off items
     public Transform playerCamera; // Reference to the player's camera
     public LayerMask pickUpLayer; // Layer mask to detect pickable objects
-    public LayerMask dropOffLayer; // Layer mask for drop-off points
+    public LayerMask dropOffLayer;
+    public LayerMask useless;
 
     public GameObject collectiblePrefab; // Prefab of the collectible to instantiate
     public Transform dropOffCube; // Reference to the drop-off point in the scene
     public float spawnOffset = 1.0f; // Offset to avoid overlap when instantiating collectibles
 
-    private int currentItems = 0; // Current number of collected items
+    [SerializeField] private int currentItems = 0; // Current number of collected items
     private GameObject objectInRange; // Object currently in pick-up range
     private GameObject dropOffPoint; // The drop-off object within range
     private List<GameObject> collectedItems = new List<GameObject>(); // List to hold collected items
@@ -35,8 +36,10 @@ public class CollectiblePickUp : MonoBehaviour
         {
             PickUpItem();
         }
-
+        
         CheckForDropOffPoint();
+
+
     }
 
     // Method to check if there is an object within range
@@ -80,26 +83,30 @@ public class CollectiblePickUp : MonoBehaviour
     // Check for a drop-off point within range
     void CheckForDropOffPoint()
     {
+        //Debug.Log("First Line CheckForDropOffPoint");
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, dropOffRange, dropOffLayer))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, dropOffRange, dropOffLayer) && Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("Second Line CheckForDropOffPoint");
             dropOffPoint = hit.collider.gameObject;
+            DropAndInstantiateItems();
         }
         else
         {
+            //Debug.Log("Third Line CheckForDropOffPoint");
             dropOffPoint = null;
         }
     }
 
     // Collision detection to drop off items
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("DropOff"))
+        if (collision.gameObject.CompareTag("DropOff") && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log($"Collided with drop-off object: {collision.gameObject.name}");
             DropAndInstantiateItems();
         }
-    }
+    }*/
 
     // Method to drop off and instantiate all collected items
     public void DropAndInstantiateItems()
@@ -131,7 +138,11 @@ public class CollectiblePickUp : MonoBehaviour
             GameObject collectible = Instantiate(collectiblePrefab, spawnPosition, Quaternion.identity);
             collectible.name = $"Collectible_{index + 1}";
             Rigidbody rb = collectible.AddComponent<Rigidbody>();
-            rb.mass = 1f;
+            if (rb != null)
+            { 
+                rb.mass = 1f;
+            }
+            //transform.gameObject.layer = useless;
             Debug.Log($"Instantiated {collectible.name} at position {spawnPosition}");
         }
         else

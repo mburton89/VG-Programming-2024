@@ -8,6 +8,7 @@ public class CollectibleRespawnOnCollision : MonoBehaviour
     {
         if (collision.gameObject.tag != "Floor")
         {
+            if (CollectibleSpawner.Instance == null) return;
             CollectibleSpawner.Instance.cubeCount--;
             Debug.Log(CollectibleSpawner.Instance.cubeCount);
             Destroy(gameObject);
