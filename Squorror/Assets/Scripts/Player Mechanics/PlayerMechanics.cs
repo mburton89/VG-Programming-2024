@@ -7,6 +7,7 @@ public class PlayerMechanics : MonoBehaviour
    
     public float speed;
     public float jumpHeight;
+    public float currentHealth;
     public float gravity = -9.81f;
 
     private CharacterController controller;

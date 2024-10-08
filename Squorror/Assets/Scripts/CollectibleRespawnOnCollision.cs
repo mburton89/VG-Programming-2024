@@ -6,7 +6,7 @@ public class CollectibleRespawnOnCollision : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Floor")
+        if (collision.gameObject.tag != "Floor" && collision.gameObject.tag != "Agent")
         {
             if (CollectibleSpawner.Instance == null) return;
             CollectibleSpawner.Instance.cubeCount--;
@@ -14,8 +14,6 @@ public class CollectibleRespawnOnCollision : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("TOUCHING");
             CollectibleSpawner.Instance.SpawnOneCollectible();
-            
         }
-        
     }
 }
