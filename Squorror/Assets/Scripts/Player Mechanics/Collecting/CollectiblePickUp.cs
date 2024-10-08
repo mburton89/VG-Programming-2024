@@ -6,8 +6,9 @@ using UnityEngine;
 public class CollectiblePickUp : MonoBehaviour
 {
     public float pickUpRange = 2.0f; // Distance within which the player can pick up the object
-    public float dropOffRange = 2.0f; // Distance within which the player can drop off items
-    private float speed;
+    public float dropOffRange = 2.0f; // Distance within which the player can drop off items;
+    public float weightSpeedPenalty;
+    private float baseSpeed;
     public Transform playerCamera; // Reference to the player's camera
     public LayerMask pickUpLayer; // Layer mask to detect pickable objects
     public LayerMask dropOffLayer;
@@ -30,7 +31,7 @@ public class CollectiblePickUp : MonoBehaviour
     {
         UpdateInventoryUI(); // Initialize the inventory UI
         playerMechanics = GetComponent<PlayerMechanics>();
-        
+        baseSpeed = playerMechanics.speed;
     }
 
     void Update()
@@ -71,7 +72,7 @@ public class CollectiblePickUp : MonoBehaviour
             collectedItems.Add(objectInRange); // Add the item to the list
             Destroy(objectInRange); // Destroy the item in the scene
             currentItems++;
-            playerMechanics.speed -=2;
+            playerMechanics.speed -= weightSpeedPenalty;
             UpdateInventoryUI();
             Debug.Log($"Picked up: {objectInRange.name}");
         }
@@ -126,6 +127,7 @@ public class CollectiblePickUp : MonoBehaviour
             }
             collectedItems.Clear(); // Clear the list of collected items
             currentItems = 0; // Reset item count
+            playerMechanics.speed = baseSpeed;
             UpdateInventoryUI();
             Debug.Log("All items dropped off and instantiated.");
         }
