@@ -629,6 +629,7 @@ MonoBehaviour:
   dropOffCube: {fileID: 275108164}
   spawnOffset: 1
   currentItems: 0
+  playerMechanics: {fileID: 845333400}
   maxItems: 5
 --- !u!54 &845333403
 Rigidbody:

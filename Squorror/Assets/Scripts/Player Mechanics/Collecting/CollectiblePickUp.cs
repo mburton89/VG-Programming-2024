@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CollectiblePickUp : MonoBehaviour
 {
     public float pickUpRange = 2.0f; // Distance within which the player can pick up the object
     public float dropOffRange = 2.0f; // Distance within which the player can drop off items
+    private float speed;
     public Transform playerCamera; // Reference to the player's camera
     public LayerMask pickUpLayer; // Layer mask to detect pickable objects
     public LayerMask dropOffLayer;
@@ -20,11 +22,15 @@ public class CollectiblePickUp : MonoBehaviour
     private GameObject dropOffPoint; // The drop-off object within range
     private List<GameObject> collectedItems = new List<GameObject>(); // List to hold collected items
 
+    [SerializeField] PlayerMechanics playerMechanics;
+
     public int maxItems = 5; // Maximum number of items the player can hold
 
     void Start()
     {
         UpdateInventoryUI(); // Initialize the inventory UI
+        playerMechanics = GetComponent<PlayerMechanics>();
+        
     }
 
     void Update()
@@ -65,6 +71,7 @@ public class CollectiblePickUp : MonoBehaviour
             collectedItems.Add(objectInRange); // Add the item to the list
             Destroy(objectInRange); // Destroy the item in the scene
             currentItems++;
+            playerMechanics.speed -=2;
             UpdateInventoryUI();
             Debug.Log($"Picked up: {objectInRange.name}");
         }
