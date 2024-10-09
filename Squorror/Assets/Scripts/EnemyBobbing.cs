@@ -17,7 +17,7 @@ public class EnemyBobbing : MonoBehaviour
 
     void Start()
     {
-        offset = Vector3.down;
+        offset = Vector3.up;
         startingPos = transform.position;
         endingPos = transform.position + offset;
     }
@@ -27,7 +27,7 @@ public class EnemyBobbing : MonoBehaviour
         Bobbing();
     }
 
-    void Bobbing()
+    public void Bobbing()
     {
         bobbingActualSpeed = bobbingSpeed * bobbingMultiplier;
 

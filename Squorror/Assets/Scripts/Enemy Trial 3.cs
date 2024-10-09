@@ -17,11 +17,13 @@ public class Monster : MonoBehaviour
     public Camera playerCam, jumpscareCam;
     public float catchDistance;
     public AudioClip jumpscareSound;
+    EnemyBobbing EnemyBobbing;
 
     private void Start()
     {
         player = GameObject.Find("Player").transform;
         playerCam = GameObject.Find("Player").GetComponentInChildren<Camera>();
+        EnemyBobbing = gameObject.GetComponent<EnemyBobbing>();
     }
     void Update()
     {
@@ -42,6 +44,7 @@ public class Monster : MonoBehaviour
         {
             MoveTowardsPlayer(); // Implement your movement logic here
         }
+
     }
 
     private bool IsLookedAt()
