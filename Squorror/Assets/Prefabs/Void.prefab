@@ -218,5 +218,5 @@ MonoBehaviour:
   viewAngleThreshold: 65
   playerCam: {fileID: 0}
   jumpscareCam: {fileID: 0}
-  catchDistance: 0
+  catchDistance: 180
   jumpscareSound: {fileID: 0}

@@ -24,7 +24,7 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
-        int faceNumber = UnityEngine.Random.Range(1, 2);
+        int faceNumber = UnityEngine.Random.Range(1, 3);
         if(faceNumber == 1)
             activeMaterial = monsterFace1;
         else
@@ -40,7 +40,6 @@ public class Monster : MonoBehaviour
         if (IsLookedAt() && IsObserved())
         {
             isMoving = false;
-            Debug.Log("The object is being observed and has stopped moving.");
             ai.speed = 0;
         }
         else

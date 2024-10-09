@@ -3740,6 +3740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpHeight: 2
+  currentHealth: 0
   gravity: -9.81
 --- !u!143 &929003122
 CharacterController:
@@ -5977,7 +5978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 24.420044, y: 0.050048828}
+  m_AnchoredPosition: {x: 24.419922, y: 0.050048828}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1515104190

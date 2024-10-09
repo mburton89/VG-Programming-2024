@@ -27,10 +27,10 @@ public class VoidDeath : MonoBehaviour
     void Update()
     {
         // Move the object if it's not being observed
-            attemptToKillPlayer(); // Implement your movement logic here
+        CheckPlayerHeight(); // Implement your movement logic here
     }
 
-    private void attemptToKillPlayer()
+    private void CheckPlayerHeight()
     {
 
         //If the distance between the player and the AI is less than or equal to the catchDistance,

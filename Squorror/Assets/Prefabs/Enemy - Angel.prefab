@@ -222,6 +222,9 @@ MonoBehaviour:
   jumpscareCam: {fileID: 8228712177282730151}
   catchDistance: 3
   jumpscareSound: {fileID: 8300000, guid: dad9591fcf373f3499542720c1dd5bcd, type: 3}
+  activeMaterial: {fileID: 0}
+  monsterFace1: {fileID: 2100000, guid: 25baac45f32a4394887d7323ad43a61e, type: 2}
+  monsterFace2: {fileID: 2100000, guid: f770afb059b816a4299a1e30915bcd30, type: 2}
 --- !u!65 &4215906540344728350
 BoxCollider:
   m_ObjectHideFlags: 0
