@@ -50,7 +50,6 @@ public class CollectibleSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(randX, 5f, randZ);
             Instantiate(collectible, spawnPosition, Quaternion.identity);
             cubeCount++;
-            Debug.Log(cubeCount.ToString());
         }
     }
 }

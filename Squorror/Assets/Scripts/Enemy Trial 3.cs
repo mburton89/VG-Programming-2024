@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,19 @@ public class Monster : MonoBehaviour
     public Camera playerCam, jumpscareCam;
     public float catchDistance;
     public AudioClip jumpscareSound;
+    public Material activeMaterial;
+    public Material monsterFace1;
+    public Material monsterFace2;
 
     private void Start()
     {
+        int faceNumber = UnityEngine.Random.Range(1, 3);
+        if(faceNumber == 1)
+            activeMaterial = monsterFace1;
+        else
+            activeMaterial = monsterFace2;
+        Debug.Log(faceNumber);
+        gameObject.GetComponent<MeshRenderer>().material = activeMaterial;
         player = GameObject.Find("Player").transform;
         playerCam = GameObject.Find("Player").GetComponentInChildren<Camera>();
     }
@@ -29,7 +40,6 @@ public class Monster : MonoBehaviour
         if (IsLookedAt() && IsObserved())
         {
             isMoving = false;
-            Debug.Log("The object is being observed and has stopped moving.");
             ai.speed = 0;
         }
         else

@@ -103,11 +103,10 @@ GameObject:
   - component: {fileID: 6030366927496971148}
   - component: {fileID: 5297638621314869781}
   - component: {fileID: 6478445283297088507}
-  - component: {fileID: 3805206977405413244}
-  - component: {fileID: 6758356340399083363}
   - component: {fileID: 4215906540344728350}
+  - component: {fileID: -33972790937797160}
   m_Layer: 0
-  m_Name: Enemy - Angel
+  m_Name: Void
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,52 +178,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!195 &3805206977405413244
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773798606940735328}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 100000
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &6758356340399083363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773798606940735328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 006690cf347550a46a0c99f7bb8674a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 12
-  jumpscareTime: 0
-  ai: {fileID: 3805206977405413244}
-  player: {fileID: 0}
-  viewAngleThreshold: 65
-  playerCam: {fileID: 0}
-  jumpscareCam: {fileID: 8228712177282730151}
-  catchDistance: 3
-  jumpscareSound: {fileID: 8300000, guid: dad9591fcf373f3499542720c1dd5bcd, type: 3}
-  activeMaterial: {fileID: 0}
-  monsterFace1: {fileID: 2100000, guid: 25baac45f32a4394887d7323ad43a61e, type: 2}
-  monsterFace2: {fileID: 2100000, guid: f770afb059b816a4299a1e30915bcd30, type: 2}
 --- !u!65 &4215906540344728350
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -246,3 +199,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-33972790937797160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773798606940735328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d96b9cec2b0584592f9bb7755f4bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  jumpscareTime: 0
+  ai: {fileID: 0}
+  player: {fileID: 0}
+  viewAngleThreshold: 65
+  playerCam: {fileID: 0}
+  jumpscareCam: {fileID: 0}
+  catchDistance: 180
+  jumpscareSound: {fileID: 0}
