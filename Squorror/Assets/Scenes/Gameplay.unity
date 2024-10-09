@@ -3740,6 +3740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpHeight: 2
+  currentHealth: 0
   gravity: -9.81
 --- !u!143 &929003122
 CharacterController:
@@ -3870,6 +3871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpRange: 2
   dropOffRange: 2
+  weightSpeedPenalty: 0
   playerCamera: {fileID: 43213412}
   pickUpLayer:
     serializedVersion: 2
@@ -3884,6 +3886,8 @@ MonoBehaviour:
   dropOffCube: {fileID: 120860635}
   spawnOffset: 1
   currentItems: 0
+  playerMechanics: {fileID: 929003121}
+  collectible: {fileID: 4996479988246214310, guid: c5ee07b75d023444d8cea93f3fcfffe7, type: 3}
   maxItems: 5
 --- !u!1 &943372045
 GameObject:
@@ -6142,6 +6146,10 @@ PrefabInstance:
     - target: {fileID: 7773798606940735328, guid: c83fa16e35f562e489711b3511cbfd04, type: 3}
       propertyPath: m_Name
       value: Enemy - Angel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773798606940735328, guid: c83fa16e35f562e489711b3511cbfd04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

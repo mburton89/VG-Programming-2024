@@ -24,6 +24,7 @@ public class CollectiblePickUp : MonoBehaviour
     private List<GameObject> collectedItems = new List<GameObject>(); // List to hold collected items
 
     [SerializeField] PlayerMechanics playerMechanics;
+    [SerializeField] Collectible collectible;
 
     public int maxItems = 5; // Maximum number of items the player can hold
 
@@ -32,6 +33,7 @@ public class CollectiblePickUp : MonoBehaviour
         UpdateInventoryUI(); // Initialize the inventory UI
         playerMechanics = GetComponent<PlayerMechanics>();
         baseSpeed = playerMechanics.speed;
+        collectible = GetComponent<Collectible>();
     }
 
     void Update()
@@ -72,7 +74,8 @@ public class CollectiblePickUp : MonoBehaviour
             collectedItems.Add(objectInRange); // Add the item to the list
             Destroy(objectInRange); // Destroy the item in the scene
             currentItems++;
-            playerMechanics.speed -= weightSpeedPenalty;
+            //collectible.
+            playerMechanics.speed -= collectible.collectibleWeight; 
             UpdateInventoryUI();
             Debug.Log($"Picked up: {objectInRange.name}");
         }

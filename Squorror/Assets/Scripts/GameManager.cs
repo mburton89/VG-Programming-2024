@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public float totalPlayerWeight;
     public float totalBaseWeight;
+    public float weightToAdd;
 
     private void Awake()
     {
@@ -23,10 +24,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    AddWeightToBase();
-        //}
+        AddWeightToBase();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log(weightToAdd);
+        }
+        //AddWeightToPlayer(weightToAdd);
+        
     }
 
     public void AddWeightToPlayer(float weightToAdd)
@@ -36,7 +40,8 @@ public class GameManager : MonoBehaviour
 
     public void AddWeightToBase()
     {
-        totalBaseWeight += totalPlayerWeight;
         totalPlayerWeight = 0;
+        totalBaseWeight += totalPlayerWeight;
+       
     }
 }
