@@ -30,11 +30,13 @@ public class VoidDeath : MonoBehaviour
         CheckPlayerHeight(); // Implement your movement logic here
     }
 
+
+
     private void CheckPlayerHeight()
     {
-
+        print("player.transform.position.y " + player.transform.position.y);
         //If the distance between the player and the AI is less than or equal to the catchDistance,
-        //if (OnCollisionEnter())//distance <= catchDistance && (player.gameObject.activeSelf == true))
+        if (player.transform.position.y < -20)//distance <= catchDistance && (player.gameObject.activeSelf == true))
         {
             player.gameObject.SetActive(false); //The player object will be set false
             jumpscareCam.gameObject.SetActive(true); //The jumpscare camera will be set true
