@@ -26,7 +26,7 @@ public class LevelSpawner : MonoBehaviour
     public void SpawnLevel()
     {
         Debug.Log("Start Level Spawn");
-        int rand = Random.Range(0, levelLayouts.Count + 1);
+        int rand = Random.Range(0, levelLayouts.Count);
         GameObject spawnedLevel = levelLayouts[rand];
         spawnedLevel.SetActive(true);
         Debug.Log("Spawned Level " + rand);
