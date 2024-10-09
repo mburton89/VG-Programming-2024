@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance;
     public float totalPlayerWeight;
     public float totalBaseWeight;
+    public float weightToAdd;
 
     private void Awake()
     {
@@ -17,16 +17,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    AddWeightToBase();
-        //}
+        totalPlayerWeight = 0;  
     }
 
     public void AddWeightToPlayer(float weightToAdd)
@@ -36,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     public void AddWeightToBase()
     {
+       // totalPlayerWeight = 0;
         totalBaseWeight += totalPlayerWeight;
-        totalPlayerWeight = 0;
+       
     }
 }

@@ -8,6 +8,7 @@ public class CollectibleSpawner : MonoBehaviour
     public static CollectibleSpawner Instance;
     public GameObject collectible;
     public int cubeCount = 0;
+    public int cubesToSpawn = 100;
     public int spawnRange;
 
     private void Awake()
@@ -42,7 +43,7 @@ public class CollectibleSpawner : MonoBehaviour
 
     void InitialSpawn()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < cubesToSpawn; i++)
         {
             int randX = Random.Range(-spawnRange, spawnRange);
             int randZ = Random.Range(-spawnRange, spawnRange);

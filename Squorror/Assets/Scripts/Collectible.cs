@@ -25,10 +25,7 @@ public class Collectible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.E)) 
-        //{
-        //    GetCollected();
-        //}
+        GetCollected();
     }
 
    // private void OnCollisionEnter(Collision collision)
@@ -39,7 +36,8 @@ public class Collectible : MonoBehaviour
     public void GetCollected()
     {
         GameManager.Instance.AddWeightToPlayer(collectibleWeight);
-        Destroy(gameObject);
+        //Debug.Log();
+        //Destroy(gameObject);
     }
 
     public void AssignMaterial()

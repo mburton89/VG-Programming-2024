@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CollectiblePickUp : MonoBehaviour
 {
     public float pickUpRange = 2.0f; // Distance within which the player can pick up the object
-    public float dropOffRange = 2.0f; // Distance within which the player can drop off items
+    public float dropOffRange = 2.0f; // Distance within which the player can drop off items;
+    public float weightSpeedPenalty;
+    private float baseSpeed;
     public Transform playerCamera; // Reference to the player's camera
     public LayerMask pickUpLayer; // Layer mask to detect pickable objects
     public LayerMask dropOffLayer;
@@ -20,11 +23,20 @@ public class CollectiblePickUp : MonoBehaviour
     private GameObject dropOffPoint; // The drop-off object within range
     private List<GameObject> collectedItems = new List<GameObject>(); // List to hold collected items
 
+    [SerializeField] PlayerMechanics playerMechanics;
+    [SerializeField] Collectible collectible;
+
     public int maxItems = 5; // Maximum number of items the player can hold
+
+    public float maxWeight;
+    public float currentWeight;
 
     void Start()
     {
         UpdateInventoryUI(); // Initialize the inventory UI
+        playerMechanics = GetComponent<PlayerMechanics>();
+        baseSpeed = playerMechanics.speed;
+        collectible = GetComponent<Collectible>();
     }
 
     void Update()
@@ -50,23 +62,30 @@ public class CollectiblePickUp : MonoBehaviour
         {
             objectInRange = hit.collider.gameObject;
             Debug.Log($"Object in range: {objectInRange.name}");
+            HUD.Instance.UpdateCursorColor(Color.green);
         }
         else
         {
             objectInRange = null;
+            HUD.Instance.UpdateCursorColor(Color.white);
         }
     }
 
     // Method to pick up the item
     void PickUpItem()
     {
-        if (currentItems < maxItems)
+        if (currentWeight < maxWeight - objectInRange.gameObject.GetComponent<Collectible>().collectibleWeight)
         {
             collectedItems.Add(objectInRange); // Add the item to the list
             Destroy(objectInRange); // Destroy the item in the scene
             currentItems++;
-            UpdateInventoryUI();
+            //collectible.
+            playerMechanics.speed -= objectInRange.gameObject.GetComponent<Collectible>().collectibleWeight;
             Debug.Log($"Picked up: {objectInRange.name}");
+
+            currentWeight += objectInRange.gameObject.GetComponent<Collectible>().collectibleWeight;
+            HUD.Instance.UpdateWeightBarUI(currentWeight, maxWeight);
+            HUD.Instance.UpdatePlayerWeightNumber(currentWeight);
         }
         else
         {
@@ -119,8 +138,15 @@ public class CollectiblePickUp : MonoBehaviour
             }
             collectedItems.Clear(); // Clear the list of collected items
             currentItems = 0; // Reset item count
+            playerMechanics.speed = baseSpeed;
             UpdateInventoryUI();
             Debug.Log("All items dropped off and instantiated.");
+
+            GameManager.Instance.totalBaseWeight += currentWeight;
+            HUD.Instance.UpdateBaseWeightNumber(GameManager.Instance.totalBaseWeight);
+            currentWeight = 0;
+            HUD.Instance.UpdateWeightBarUI(currentWeight, maxWeight);
+            HUD.Instance.UpdatePlayerWeightNumber(currentWeight);
         }
         else
         {
@@ -136,6 +162,7 @@ public class CollectiblePickUp : MonoBehaviour
             // Calculate the spawn position with a slight offset to prevent overlap
             Vector3 spawnPosition = dropOffCube.position + new Vector3(index * spawnOffset, 1.524f, 0);
             GameObject collectible = Instantiate(collectiblePrefab, spawnPosition, Quaternion.identity);
+            collectible.gameObject.GetComponent<CollectibleRespawnOnCollision>().enabled = false;
             collectible.name = $"Collectible_{index + 1}";
             Rigidbody rb = collectible.AddComponent<Rigidbody>();
             if (rb != null)

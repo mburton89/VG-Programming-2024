@@ -6,7 +6,7 @@ public class CollectibleRespawnOnCollision : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Floor" && collision.gameObject.tag != "Agent")
+        if (collision.gameObject.tag != "Floor" && collision.gameObject.tag != "Agent" && collision.gameObject.tag != "Collectible")
         {
             if (CollectibleSpawner.Instance == null) return;
             CollectibleSpawner.Instance.cubeCount--;

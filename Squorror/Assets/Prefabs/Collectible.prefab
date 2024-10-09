@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectibleWeight: 0
   minCollectibleSize: 0.5
-  maxCollectibleSize: 2
+  maxCollectibleSize: 1.5
   lightMaterial: {fileID: 2100000, guid: 505f1453ffc88514dbee99bcf4d0e17a, type: 2}
   midMaterial: {fileID: 2100000, guid: a3ff4ba664bb14c4abecc5f87068c889, type: 2}
   heavyMaterial: {fileID: 2100000, guid: 252c245266453a54ea1343cc60798fae, type: 2}
