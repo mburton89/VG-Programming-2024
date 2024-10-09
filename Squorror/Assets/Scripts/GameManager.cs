@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public float totalPlayerWeight;
     public float totalBaseWeight;
+    public float totalWeight;
     public float weightToAdd;
 
     private void Awake()
