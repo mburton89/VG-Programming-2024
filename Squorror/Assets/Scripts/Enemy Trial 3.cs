@@ -82,7 +82,8 @@ public class Monster : MonoBehaviour
         //If the distance between the player and the AI is less than or equal to the catchDistance,
         if (distance <= catchDistance && (player.gameObject.activeSelf == true))
         {
-            player.gameObject.SetActive(false); //The player object will be set false
+            player.gameObject.GetComponent<PlayerMechanics>().currentHealth = 0;
+            //player.gameObject.SetActive(false); //The player object will be set false
             jumpscareCam.gameObject.SetActive(true); //The jumpscare camera will be set true
             SoundManager.Instance.Play(jumpscareSound, transform.position, .5f);
         }
