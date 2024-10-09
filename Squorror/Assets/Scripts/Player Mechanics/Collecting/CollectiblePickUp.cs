@@ -75,8 +75,7 @@ public class CollectiblePickUp : MonoBehaviour
             Destroy(objectInRange); // Destroy the item in the scene
             currentItems++;
             //collectible.
-            playerMechanics.speed -= collectible.collectibleWeight; 
-            UpdateInventoryUI();
+            playerMechanics.speed -= GameManager.Instance.totalPlayerWeight;
             Debug.Log($"Picked up: {objectInRange.name}");
         }
         else

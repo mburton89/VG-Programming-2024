@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        totalPlayerWeight = 0;  
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     public void AddWeightToBase()
     {
-        totalPlayerWeight = 0;
+       // totalPlayerWeight = 0;
         totalBaseWeight += totalPlayerWeight;
        
     }
