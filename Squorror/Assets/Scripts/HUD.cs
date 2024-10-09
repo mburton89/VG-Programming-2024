@@ -13,6 +13,8 @@ public class HUD : MonoBehaviour
 
     public Image weightBar;
 
+    public Image cursor;
+
     void Awake()
     {
         Instance = this;
@@ -26,15 +28,33 @@ public class HUD : MonoBehaviour
         {
             weightBar.color = Color.red;
         }
+        else
+        { 
+            weightBar.color = Color.white;
+        }
     }
 
-    public void UpdateBaseWeightNumber(int baseWeight)
+    public void UpdateBaseWeightNumber(float baseWeight)
     {
-        baseWeightNumber.SetText(baseWeight.ToString());
+        baseWeightNumber.SetText(baseWeight.ToString("0.00"));
     }
 
-    public void UpdatePlayerWeightNumber(int baseWeight)
+    public void UpdatePlayerWeightNumber(float playerWeight)
     {
-        playerWeightNumber.SetText(baseWeight.ToString());
+        playerWeightNumber.SetText(playerWeight.ToString("0.00"));
+    }
+
+    public void UpdateCursorColor(Color newColor)
+    {
+        cursor.color = newColor;
+
+/*        if (newColor == Color.red)
+        {
+            cursor.transform.localScale = new Vector3(2, 2, 2);
+        }
+        else
+        {
+            cursor.transform.localScale = Vector3.one;
+        }*/
     }
 }
