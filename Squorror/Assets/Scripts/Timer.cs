@@ -32,9 +32,16 @@ public class Timer : MonoBehaviour
         else
         {
             timerText.color = Color.white;
+
+            if (!hasEndedTimer)
+            { 
+                GameManager.Instance.GameOver();
+            }
+
             hasEndedTimer = true;
             Debug.Log("Timer has reached zero");
             //statsMenu.HandleTimerEnd();
+
         }
     }
 }

@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
+    public AudioSource collect;
+
     private void Awake()
     {
         if (Instance == null)
@@ -29,5 +31,10 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
         audioSource.volume = volume;
         Destroy(soundObject,clip.length);
+    }
+
+    public void PlayCollectSound()
+    {
+        collect.Play();
     }
 }

@@ -109,6 +109,8 @@ public class CollectiblePickUp : MonoBehaviour
             HUD.Instance.UpdatePlayerWeightNumber(currentWeight);
 
             hasPressedEToCollect = true;
+            SoundManager.Instance.PlayCollectSound();
+
         }
         else
         {
@@ -183,6 +185,8 @@ public class CollectiblePickUp : MonoBehaviour
 
             HUD.Instance.HidePressEToDropOff();
             hasPressedEToDropOff = true;
+
+            SoundManager.Instance.PlayCollectSound();
         }
         else
         {

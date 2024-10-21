@@ -16,6 +16,7 @@ public class Retry : MonoBehaviour
 
     public void HandleButton()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

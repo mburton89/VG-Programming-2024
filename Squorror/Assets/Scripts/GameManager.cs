@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public float totalWeight;
     public float weightToAdd;
 
+    public GameObject statsMenuContainer;
+
     private void Awake()
     {
         Instance = this;
@@ -31,5 +33,18 @@ public class GameManager : MonoBehaviour
        // totalPlayerWeight = 0;
         totalBaseWeight += totalPlayerWeight;
        
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverCo());
+    }
+
+    private IEnumerator GameOverCo()
+    {
+        yield return new WaitForSeconds(2);
+        Cursor.lockState = CursorLockMode.None;
+        statsMenuContainer.SetActive(true);
+        Time.timeScale = 0;
     }
 }

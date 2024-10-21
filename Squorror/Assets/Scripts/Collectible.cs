@@ -25,7 +25,7 @@ public class Collectible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetCollected();
+        //GetCollected();
     }
 
    // private void OnCollisionEnter(Collision collision)

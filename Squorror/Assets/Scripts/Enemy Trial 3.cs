@@ -22,6 +22,8 @@ public class Monster : MonoBehaviour
     public Material monsterFace1;
     public Material monsterFace2;
 
+    bool hasReachedPlayer;
+
     private void Start()
     {
         int faceNumber = UnityEngine.Random.Range(1, 3);
@@ -90,12 +92,15 @@ public class Monster : MonoBehaviour
         ai.destination = dest; //The AI's destination will equal to dest
 
         //If the distance between the player and the AI is less than or equal to the catchDistance,
-        if (distance <= catchDistance && (player.gameObject.activeSelf == true))
+        if (distance <= catchDistance && (player.gameObject.activeSelf == true) && !hasReachedPlayer)
         {
             player.gameObject.GetComponent<PlayerMechanics>().currentHealth = 0;
             //player.gameObject.SetActive(false); //The player object will be set false
             jumpscareCam.gameObject.SetActive(true); //The jumpscare camera will be set true
             SoundManager.Instance.Play(jumpscareSound, transform.position, .5f);
+            hasReachedPlayer = true;
+            ai.speed = 0;
+            GameManager.Instance.GameOver();
         }
     }
 }
