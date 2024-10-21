@@ -15,6 +15,11 @@ public class HUD : MonoBehaviour
 
     public Image cursor;
 
+    public GameObject pressEToCollect;
+    public GameObject pressEToDropOff;
+    public GameObject tooHeavy;
+
+
     void Awake()
     {
         Instance = this;
@@ -56,5 +61,40 @@ public class HUD : MonoBehaviour
         {
             cursor.transform.localScale = Vector3.one;
         }*/
+    }
+
+    public void ShowPressEToCollect()
+    {
+        pressEToCollect.SetActive(true);
+    }
+
+    public void HidePressEToCollect()
+    {
+        pressEToCollect.SetActive(false);
+    }
+
+    public void ShowTooHeavy()
+    {
+        if (!tooHeavy.activeInHierarchy)
+        { 
+            StartCoroutine(ShowTooHeavyCo());
+        }
+    }
+
+    private IEnumerator ShowTooHeavyCo()
+    {
+        tooHeavy.SetActive(true);
+        yield return new WaitForSeconds(2);
+        tooHeavy.SetActive(false);
+    }
+
+    public void ShowPressEToDropOff()
+    {
+        pressEToDropOff.SetActive(true);
+    }
+
+    public void HidePressEToDropOff()
+    {
+        pressEToDropOff.SetActive(false);
     }
 }

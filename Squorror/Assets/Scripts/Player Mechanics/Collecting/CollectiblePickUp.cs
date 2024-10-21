@@ -31,6 +31,9 @@ public class CollectiblePickUp : MonoBehaviour
     public float maxWeight;
     public float currentWeight;
 
+    bool hasPressedEToCollect;
+    bool hasPressedEToDropOff;
+
     void Start()
     {
         UpdateInventoryUI(); // Initialize the inventory UI
@@ -51,7 +54,10 @@ public class CollectiblePickUp : MonoBehaviour
         
         CheckForDropOffPoint();
 
-
+        if (dropOffPoint != null && Input.GetKeyDown(KeyCode.E))
+        {
+            DropAndInstantiateItems();
+        }
     }
 
     // Method to check if there is an object within range
@@ -62,12 +68,27 @@ public class CollectiblePickUp : MonoBehaviour
         {
             objectInRange = hit.collider.gameObject;
             Debug.Log($"Object in range: {objectInRange.name}");
-            HUD.Instance.UpdateCursorColor(Color.green);
+            if (objectInRange.gameObject.GetComponent<Collectible>())
+            {
+                if (objectInRange.gameObject.GetComponent<Collectible>().collectibleWeight > (maxWeight - currentWeight))
+                {
+                    HUD.Instance.UpdateCursorColor(Color.red);
+                }
+                else 
+                {
+                    HUD.Instance.UpdateCursorColor(Color.cyan);
+                    if (!hasPressedEToCollect)
+                    {
+                        HUD.Instance.ShowPressEToCollect();
+                    }
+                }
+            }
         }
         else
         {
             objectInRange = null;
-            HUD.Instance.UpdateCursorColor(Color.white);
+            HUD.Instance.UpdateCursorColor(Color.grey);
+            HUD.Instance.HidePressEToCollect();
         }
     }
 
@@ -86,10 +107,13 @@ public class CollectiblePickUp : MonoBehaviour
             currentWeight += objectInRange.gameObject.GetComponent<Collectible>().collectibleWeight;
             HUD.Instance.UpdateWeightBarUI(currentWeight, maxWeight);
             HUD.Instance.UpdatePlayerWeightNumber(currentWeight);
+
+            hasPressedEToCollect = true;
         }
         else
         {
             Debug.Log("Inventory is full!");
+            HUD.Instance.ShowTooHeavy();
         }
     }
 
@@ -104,16 +128,25 @@ public class CollectiblePickUp : MonoBehaviour
     {
         //Debug.Log("First Line CheckForDropOffPoint");
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, dropOffRange, dropOffLayer) && Input.GetKeyDown(KeyCode.E))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, dropOffRange, dropOffLayer))
         {
             Debug.Log("Second Line CheckForDropOffPoint");
             dropOffPoint = hit.collider.gameObject;
-            DropAndInstantiateItems();
+
+            if (currentWeight > 0)
+            {
+                HUD.Instance.UpdateCursorColor(Color.cyan);
+                if (!hasPressedEToDropOff)
+                {
+                    HUD.Instance.ShowPressEToDropOff();
+                }
+            }
         }
         else
         {
             //Debug.Log("Third Line CheckForDropOffPoint");
             dropOffPoint = null;
+            HUD.Instance.HidePressEToDropOff();
         }
     }
 
@@ -147,6 +180,9 @@ public class CollectiblePickUp : MonoBehaviour
             currentWeight = 0;
             HUD.Instance.UpdateWeightBarUI(currentWeight, maxWeight);
             HUD.Instance.UpdatePlayerWeightNumber(currentWeight);
+
+            HUD.Instance.HidePressEToDropOff();
+            hasPressedEToDropOff = true;
         }
         else
         {
